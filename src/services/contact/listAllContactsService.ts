@@ -4,14 +4,14 @@ import Contact from "../../entities/contact.entity";
 import { IArrayContacts } from "../../interfaces/contact.interfaces";
 import { arrayContactSchema } from "../../schemas/contact.schemas";
 
-const listAllContactsService = async (): Promise<IArrayContacts> => {
+const listAllContactsService = async (): Promise<Contact[]> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
 
-  const listContacts: Contact[] = await contactRepository.find();
+  const listContacts: Contact[] = await contactRepository.find({ relations: ["client"] });
 
-  const contacts: IArrayContacts = arrayContactSchema.parse(listContacts);
+  // const contacts: IArrayContacts = arrayContactSchema.parse(listContacts);
 
-  return contacts;
+  return listContacts;
 };
 
 export default listAllContactsService;
