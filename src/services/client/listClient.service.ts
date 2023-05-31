@@ -5,6 +5,7 @@ import { IArrayClients } from "../../interfaces/client.interfaces";
 import { arrayClientSchema } from "../../schemas/client.schemas";
 
 const listAllClientsService = async (): Promise<IArrayClients> => {
+  
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
 
   const listClients: Array<Client> = await clientRepository.find();
