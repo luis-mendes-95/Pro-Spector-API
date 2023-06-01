@@ -17,7 +17,7 @@ class Conversion {
 
   @ManyToOne(() => Client, (client) => client)
   @JoinColumn({ name: "clientId" })
-  cliente: Client;
+  client: Client;
 
   @Column()
   details: string;
@@ -26,13 +26,13 @@ class Conversion {
   value: number;
 
   @CreateDateColumn({ type: "date" })
-  createdAt: String;
+  createdAt: Date;
 
   @UpdateDateColumn({ type: "date" })
-  updatedAt: String;
+  updatedAt: Date;
 
   @DeleteDateColumn({ type: "date" })
-  deletedAt: String;
+  deletedAt: Date;
 }
 
 export default Conversion;

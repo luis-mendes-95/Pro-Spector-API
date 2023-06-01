@@ -5,13 +5,16 @@ import deleteConversionService from "../services/conversion/deleteConversionServ
 import updateConversionService from "../services/conversion/updateConversionService";
 import { IConversion, IConversionUpdate } from "../interfaces/conversion.interfaces";
 
-const createConversionController = async (
-  req: Request,
-  res: Response
-): Promise<Response> => {
+const createConversionController = async (req: Request, res: Response): Promise<Response> => {
+
   const conversionData: IConversion = req.body;
 
+  if (!conversionData.clientId) {
+    return res.status(400).json({ error: "clientId is required" });
+  }
+
   const newConversion = await createConversionService(conversionData);
+
   return res.status(201).json(newConversion);
 };
 
@@ -38,17 +41,7 @@ const updateConversionController = async (
   const conversionData: IConversionUpdate = req.body;
   const conversionId = parseInt(req.params.id);
 
-  const updatedConversion = await updateConversionService(
-    {
-      ...conversionData,
-      createdAt: conversionData.createdAt !== undefined ? new Date(conversionData.createdAt).toISOString() : new Date().toISOString(),
-      updatedAt: conversionData.updatedAt !== undefined ? new Date(conversionData.updatedAt).toISOString() : new Date().toISOString(),
-      deletedAt: ""
-    },
-    conversionId
-  );
-  
-
+  const updatedConversion = await updateConversionService(conversionData, conversionId);
   return res.json(updatedConversion);
 };
 

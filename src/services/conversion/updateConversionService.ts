@@ -4,32 +4,27 @@ import Conversion from "../../entities/conversion.entity";
 import { IConversionReturn, IConversionUpdate } from "../../interfaces/conversion.interfaces";
 import { returnConversionSchema } from "../../schemas/conversion.schemas";
 
-const updateConversionService = async (
-  newConversionData: Partial<Conversion>,
-  conversionId: number
-): Promise<IConversionReturn> => {
+const updateConversionService = async (  newConversionData: IConversionUpdate,  conversionId: number): Promise<Conversion> => {
+  
   const conversionRepository: Repository<Conversion> = AppDataSource.getRepository(Conversion);
 
-  const oldConversionData: Conversion | null = await conversionRepository.findOne({
+  const conversionToUpdate: Conversion | null = await conversionRepository.findOne({
     where: {
       id: conversionId,
     },
   });
 
-  if (!oldConversionData) {
-    throw new Error(`Conversion with ID ${conversionId} not found.`);
+  if (!conversionToUpdate) {
+    throw new Error("Conversion not found");
   }
 
-  const mergedConversionData: Conversion = {
-    ...oldConversionData,
-    ...newConversionData,
-  };
+  conversionToUpdate.details = newConversionData.details || conversionToUpdate.details;
+  conversionToUpdate.value = newConversionData.value || conversionToUpdate.value;
 
-  const updatedConversion: Conversion = await conversionRepository.save(mergedConversionData);
+  await conversionRepository.save(conversionToUpdate);
 
-  const parsedUpdatedConversion: IConversionReturn = returnConversionSchema.parse(updatedConversion);
-
-  return parsedUpdatedConversion;
+  return conversionToUpdate;
 };
+
 
 export default updateConversionService;
