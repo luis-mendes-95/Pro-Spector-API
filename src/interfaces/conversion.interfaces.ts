@@ -4,17 +4,11 @@ import {
   conversionSchema,
   returnConversionSchema,
   arrayConversionSchema,
-  conversionUpdateSchema,
 } from "../schemas/conversion.schemas";
 
 type IConversion = z.infer<typeof conversionSchema>;
 type IConversionReturn = z.infer<typeof returnConversionSchema>;
 type IArrayConversions = z.infer<typeof arrayConversionSchema>;
-type IConversionUpdate = DeepPartial<IConversion> & { updatedAt?: string };
+type IConversionUpdate = Partial<IConversion>;
 
-export {
-  IConversion,
-  IConversionReturn,
-  IArrayConversions,
-  IConversionUpdate,
-};
+export { IConversion, IConversionReturn, IArrayConversions, IConversionUpdate };

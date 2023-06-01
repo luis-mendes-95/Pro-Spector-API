@@ -5,7 +5,7 @@ import Conversion from "../../entities/conversion.entity";
 import { IConversion, IConversionReturn } from "../../interfaces/conversion.interfaces";
 import { returnConversionSchema } from "../../schemas/conversion.schemas";
 
-const createConversionService = async (conversionData: IConversion): Promise<IConversionReturn> => {
+const createConversionService = async (conversionData: IConversion): Promise<Conversion> => {
   const { clientId, details, value } = conversionData;
 
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
@@ -22,16 +22,16 @@ const createConversionService = async (conversionData: IConversion): Promise<ICo
   }
 
   const conversion: Conversion = conversionRepository.create({
-    cliente: client,
+    client: client,
     details,
     value,
   });
 
   await conversionRepository.save(conversion);
 
-  const newConversion: IConversionReturn = returnConversionSchema.parse(conversion);
+  // const newConversion: IConversionReturn = returnConversionSchema.parse(conversion);
 
-  return newConversion;
+  return conversion;
 };
 
 export default createConversionService;

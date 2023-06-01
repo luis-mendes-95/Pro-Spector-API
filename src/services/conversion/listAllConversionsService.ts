@@ -4,14 +4,12 @@ import Conversion from "../../entities/conversion.entity";
 import { IArrayConversions } from "../../interfaces/conversion.interfaces";
 import { arrayConversionSchema } from "../../schemas/conversion.schemas";
 
-const listAllConversionsService = async (): Promise<IArrayConversions> => {
+const listAllConversionsService = async (): Promise<Conversion[]> => {
   const conversionRepository: Repository<Conversion> = AppDataSource.getRepository(Conversion);
 
-  const listConversions: Conversion[] = await conversionRepository.find();
+  const listConversions: Conversion[] = await conversionRepository.find({ relations: ["client"] });
 
-  const conversions: IArrayConversions = arrayConversionSchema.parse(listConversions);
-
-  return conversions;
+  return listConversions;
 };
 
 export default listAllConversionsService;

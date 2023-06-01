@@ -7,29 +7,27 @@ import { returnContactSchema } from "../../schemas/contact.schemas";
 const updateContactService = async (
   newContactData: IContactUpdate,
   contactId: number
-): Promise<IContactReturn> => {
+): Promise<Contact> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
 
-  const oldContactData: Contact | null = await contactRepository.findOne({
+  const contactToUpdate: Contact | null = await contactRepository.findOne({
     where: {
       id: contactId,
     },
   });
 
-  if (!oldContactData) {
+  if (!contactToUpdate) {
     throw new Error("Contact not found");
   }
 
-  const contact: Contact = contactRepository.create();
-  contact.client = oldContactData.client;
-  contact.name = newContactData.name || oldContactData.name;
-  contact.email = newContactData.email || oldContactData.email;
+  // Atualiza as propriedades do objeto existente
+  contactToUpdate.name = newContactData.name || contactToUpdate.name;
+  contactToUpdate.email = newContactData.email || contactToUpdate.email;
 
-  await contactRepository.save(contact);
+  // Salva as alterações no banco de dados
+  await contactRepository.save(contactToUpdate);
 
-  const updatedContact: IContactReturn = returnContactSchema.parse(contact);
-
-  return updatedContact;
+  return contactToUpdate;
 };
 
 export default updateContactService;
