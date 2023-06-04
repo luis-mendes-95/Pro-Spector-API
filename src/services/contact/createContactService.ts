@@ -7,7 +7,7 @@ import { returnContactSchema } from "../../schemas/contact.schemas";
 
 const createContactService = async (contactData: IContact): Promise<IContactReturn> => {
 
-  const { clientId, name, email } = contactData;
+  const { clientId, name, email, phone } = contactData;
 
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
 
@@ -24,10 +24,9 @@ const createContactService = async (contactData: IContact): Promise<IContactRetu
   const contact: Contact = contactRepository.create({
     client,
     name,
-    email
+    email,
+    phone
   });
-
-  // const contact: Contact = contactRepository.create(contactData);
 
   const newContact: IContactReturn = returnContactSchema.parse(contactData);
 

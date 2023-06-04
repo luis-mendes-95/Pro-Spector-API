@@ -12,7 +12,6 @@ const app: Application = express();
 
 app.use(express.json());
 
-// Configuração do CORS
 app.use(cors());
 
 app.use('/users', userRoutes);

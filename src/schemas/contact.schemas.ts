@@ -4,6 +4,7 @@ const contactSchema = z.object({
   clientId: z.number(),
   name: z.string().min(3).max(45),
   email: z.string().email().max(45),
+  phone: z.string().min(3).max(45),
   createdAt: z.string(),
   updatedAt: z.string(),
   deletedAt: z.string().nullable(),

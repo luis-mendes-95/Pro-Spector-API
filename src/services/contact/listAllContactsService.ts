@@ -9,8 +9,6 @@ const listAllContactsService = async (): Promise<Contact[]> => {
 
   const listContacts: Contact[] = await contactRepository.find({ relations: ["client"] });
 
-  // const contacts: IArrayContacts = arrayContactSchema.parse(listContacts);
-
   return listContacts;
 };
 

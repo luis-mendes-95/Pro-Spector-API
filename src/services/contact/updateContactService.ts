@@ -20,11 +20,10 @@ const updateContactService = async (
     throw new Error("Contact not found");
   }
 
-  // Atualiza as propriedades do objeto existente
   contactToUpdate.name = newContactData.name || contactToUpdate.name;
   contactToUpdate.email = newContactData.email || contactToUpdate.email;
+  contactToUpdate.phone = newContactData.phone || contactToUpdate.phone;
 
-  // Salva as alterações no banco de dados
   await contactRepository.save(contactToUpdate);
 
   return contactToUpdate;
