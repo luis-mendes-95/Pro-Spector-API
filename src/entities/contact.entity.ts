@@ -25,6 +25,9 @@ class Contact {
   @Column({ length: 45 })
   email: string;
 
+  @Column({ length: 45 })
+  phone: string;
+
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
 

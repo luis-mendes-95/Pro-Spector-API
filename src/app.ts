@@ -6,9 +6,13 @@ import loginRoutes from './routers/login.routes';
 import clientRoutes from './routers/client.routes';
 import contactRoutes from './routers/contact.routes';
 import conversionRoutes from './routers/conversion.routes';
+import cors from 'cors';
 
 const app: Application = express();
+
 app.use(express.json());
+
+app.use(cors());
 
 app.use('/users', userRoutes);
 app.use('/login', loginRoutes);
