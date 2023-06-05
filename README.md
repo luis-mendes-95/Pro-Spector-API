@@ -229,3 +229,102 @@ Request Example:
 Response Example:
 
 204 - No Content
+
+# CONVERSIONS:
+
+# Conversions - Create Conversions - POST - url/conversions :
+
+Request Example:
+
+{
+	"clientId": 1,
+	"details": "Venda de 25 pares de sapato",
+	"value": 5.250,
+	"createdAt": "05-30-2023",
+	"updatedAt": "05-30-2023",
+	"deletedAt": ""
+}
+
+Response Example:
+
+{
+	"details": "Venda de 25 pares de sapato",
+	"value": 5.250,
+	"client": {
+		"id": 1,
+		"name": "Coca Cola S.A",
+		"email": "contact@cocacola.com",
+		"phone": "+55 356 958 743",
+		"createdAt": "2023-06-01",
+		"updatedAt": "2023-06-01",
+		"deletedAt": null
+	},
+	"deletedAt": null,
+	"id": 1,
+	"createdAt": "2023-06-01",
+	"updatedAt": "2023-06-01"
+}
+
+# Conversions - Edit Conversion - PATCH - url/conversions/${conversionId} :
+
+Request Example:
+
+{
+	"clientId": 1,
+	"details": "Conversão editada",
+	"value": 47589,
+	"createdAt": "05-30-2023",
+	"updatedAt": "05-30-2023",
+	"deletedAt": ""
+}
+
+Response Example:
+
+{
+	"id": 1,
+	"details": "Conversão editada",
+	"value": 47589,
+	"createdAt": "2023-06-01",
+	"updatedAt": "2023-06-01",
+	"deletedAt": null
+}
+
+# Conversions - Get All Conversions - GET - url/conversions/ :
+
+Request Example:
+
+*no body*
+!!!TOKEN NEEDED!!! >>> LOGIN TO HAVE ACCESS
+
+Response Example:
+
+[
+	{
+		"id": 1,
+		"details": "Venda de 25 ventiladores de teto",
+		"value": "47589.00",
+		"createdAt": "2023-06-01",
+		"updatedAt": "2023-06-01",
+		"deletedAt": null,
+		"client": {
+			"id": 1,
+			"name": "Coca Cola S.A",
+			"email": "contact@cocacola.com",
+			"phone": "+55 356 958 743",
+			"createdAt": "2023-06-01",
+			"updatedAt": "2023-06-01",
+			"deletedAt": null
+		}
+	}
+]
+
+# Conversions - Delete Conversion - DELETE - url/conversions/${conversionId} :
+
+Request Example:
+
+*no body*
+!!!TOKEN NEEDED!!! >>> LOGIN TO HAVE ACCESS
+
+Response Example:
+
+204 - No Content
