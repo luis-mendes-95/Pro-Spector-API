@@ -29,3 +29,18 @@ Response Example:
 	"updatedAt": "2023-06-04",
 	"deletedAt": null
 }
+
+# Login - POST - url/login :
+
+Request Example:
+
+{
+	"email":"user@user.com",
+	"password": "1234"
+}
+
+Response Example:
+
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiaWF0IjoxNjg1OTIxMzQ2LCJleHAiOjE2ODYwMDc3NDYsInN1YiI6IjEifQ.TKTQkhPhMCBouv5AgOa-yGJGDD2mk0M7cSxcBdxOGis"
+}
