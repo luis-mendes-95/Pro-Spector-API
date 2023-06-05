@@ -4,8 +4,11 @@ This is the API that connects the database to the platform used to prospectate n
 # IMPORTANT!
 Fill the request informations EXACTLY in the patterns as shown below:
 
-# Localhost:
-You can clone the repository and run local: http://localhost:3000
+# Localhost (http://localhost:3000):
+1) Clone the repository
+2) Fill the .env file as shown in ".env.example"
+3) In the terminal type "yarn" to install all libraries.
+4) And finally, type "yarn dev" to run the application.
 
 # Deploy:
 Or you can run on deploy link: https://prospector-api.onrender.com
